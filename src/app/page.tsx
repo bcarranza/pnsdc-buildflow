@@ -1,65 +1,151 @@
-import Image from "next/image";
+import Link from "next/link"
+import { Heart } from "lucide-react"
+import { Header, Thermometer, MaterialsList, DonorWall, ContactInfo, type Material, type Donation } from "@/components/dashboard"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { createServerSupabaseClient } from "@/lib/supabase/server"
 
-export default function Home() {
+async function getDashboardData() {
+  const supabase = await createServerSupabaseClient()
+
+  // Parallel fetching for performance
+  const [goalResult, materialsResult, donationsResult] = await Promise.all([
+    supabase.from('fundraising_goal').select('current_amount, goal_amount').single(),
+    supabase.from('materials').select('id, name, unit, quantity_needed, quantity_current').order('name'),
+    supabase
+      .from('donations')
+      .select(`
+        id,
+        donor_name,
+        is_anonymous,
+        amount,
+        created_at,
+        materials(name)
+      `)
+      .eq('status', 'approved')
+      .order('created_at', { ascending: false })
+      .limit(20),
+  ])
+
+  // Transform donations to flatten material name
+  const donations: Donation[] = (donationsResult.data || []).map((d) => ({
+    id: d.id,
+    donor_name: d.donor_name,
+    is_anonymous: d.is_anonymous,
+    amount: d.amount,
+    created_at: d.created_at,
+    material_name: (d.materials as { name: string } | null)?.name || null,
+  }))
+
+  // Transform materials
+  const materials: Material[] = (materialsResult.data || []).map((m) => ({
+    id: m.id,
+    name: m.name,
+    unit: m.unit,
+    quantity_needed: m.quantity_needed,
+    quantity_current: m.quantity_current,
+  }))
+
+  return {
+    fundraising: {
+      current_amount: goalResult.data?.current_amount || 0,
+      goal_amount: goalResult.data?.goal_amount || 1000000,
+    },
+    materials,
+    donations,
+    error: goalResult.error || materialsResult.error || donationsResult.error,
+  }
+}
+
+export default async function Home() {
+  const { fundraising, materials, donations, error } = await getDashboardData()
+
+  if (error) {
+    console.error('Dashboard data fetch error:', error)
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex flex-col">
+      <Header />
+
+      {/* Donation CTA */}
+      <div className="container mx-auto px-4 pt-6 max-w-4xl">
+        <Link href="/donar" className="block">
+          <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold min-h-[56px] text-lg shadow-lg hover:shadow-xl transition-all">
+            <Heart className="mr-2 h-5 w-5" />
+            Registrar mi Donación
+          </Button>
+        </Link>
+      </div>
+
+      <main className="container mx-auto px-4 py-6 md:py-8 max-w-4xl flex-1">
+        {/* Thermometer Section */}
+        <section className="mb-6 md:mb-8" aria-label="Progreso de recaudación">
+          <Card className="border-amber-200 shadow-sm">
+            <CardHeader className="text-center pb-2">
+              <CardTitle className="text-xl md:text-2xl text-amber-800">
+                Meta de Recaudación
+              </CardTitle>
+              <p className="text-gray-600">
+                Para julio 2025
+              </p>
+            </CardHeader>
+            <CardContent>
+              <Thermometer
+                currentAmount={fundraising.current_amount}
+                goalAmount={fundraising.goal_amount}
+              />
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Materials Section */}
+        <section className="mb-6 md:mb-8" aria-label="Lista de materiales">
+          <Card className="border-amber-200 shadow-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl text-amber-800">
+                Materiales de Construcción
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <MaterialsList materials={materials} />
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Donor Wall Section */}
+        <section className="mb-6 md:mb-8" aria-label="Muro de donantes">
+          <Card className="border-amber-200 shadow-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl text-amber-800">
+                Muro de Donantes
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <DonorWall donations={donations} />
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Contact Section */}
+        <section aria-label="Información de contacto">
+          <Card className="border-amber-200 shadow-sm">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl text-amber-800">
+                Información de Contacto
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ContactInfo />
+            </CardContent>
+          </Card>
+        </section>
       </main>
+
+      <footer className="py-6 text-center text-gray-500 text-sm border-t border-amber-100">
+        <p>© 2025 Parroquia Nuestra Señora del Carmen</p>
+        <p className="mt-1">Construyendo juntos un espacio para nuestra comunidad</p>
+      </footer>
     </div>
-  );
+  )
 }

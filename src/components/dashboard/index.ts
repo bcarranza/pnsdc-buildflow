@@ -1,0 +1,7 @@
+export { Header } from './Header'
+export { Thermometer } from './Thermometer'
+export { MaterialsList } from './MaterialsList'
+export type { Material } from './MaterialsList'
+export { DonorWall } from './DonorWall'
+export type { Donation } from './DonorWall'
+export { ContactInfo } from './ContactInfo'
