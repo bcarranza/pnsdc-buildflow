@@ -72,7 +72,7 @@ export function DonationForm({ materials }: DonationFormProps) {
       donorName: "",
       isAnonymous: false,
       amount: 0,
-      materialId: "",
+      materialId: "none",
     },
   })
 
@@ -132,7 +132,7 @@ export function DonationForm({ materials }: DonationFormProps) {
           donor_name: data.isAnonymous ? null : data.donorName?.trim(),
           is_anonymous: data.isAnonymous,
           amount: data.amount,
-          material_id: data.materialId || null,
+          material_id: data.materialId && data.materialId !== "none" ? data.materialId : null,
           proof_image_url: urlData.publicUrl,
         }),
       })
@@ -305,7 +305,7 @@ export function DonationForm({ materials }: DonationFormProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="">Sin preferencia</SelectItem>
+                      <SelectItem value="none">Sin preferencia</SelectItem>
                       {materials.map((material) => {
                         const progress = Math.round(
                           (material.quantity_current / material.quantity_needed) * 100
