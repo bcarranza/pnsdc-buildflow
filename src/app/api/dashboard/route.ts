@@ -43,7 +43,7 @@ export async function GET() {
         `)
         .eq('status', 'approved')
         .order('created_at', { ascending: false })
-        .limit(20),
+        .limit(100), // Increased for filtering on client
     ])
 
     // Handle errors

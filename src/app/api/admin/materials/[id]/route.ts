@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
+import { logAuditEvent, auditHelpers } from '@/lib/audit'
 
 export async function PATCH(
   request: NextRequest,
@@ -69,10 +70,10 @@ export async function PATCH(
 
     const supabase = createAdminClient()
 
-    // Verify material exists
+    // Verify material exists and get current values
     const { data: material, error: fetchError } = await supabase
       .from('materials')
-      .select('id, name')
+      .select('id, name, quantity_current')
       .eq('id', id)
       .single()
 
@@ -82,6 +83,8 @@ export async function PATCH(
         { status: 404 }
       )
     }
+
+    const oldQuantity = material.quantity_current
 
     // Update material
     const { error: updateError } = await supabase
@@ -94,6 +97,20 @@ export async function PATCH(
       return NextResponse.json(
         { error: 'Error al actualizar el material.' },
         { status: 500 }
+      )
+    }
+
+    // Log audit event if quantity changed
+    if (updateData.quantity_current !== undefined) {
+      await logAuditEvent(
+        auditHelpers.updateMaterial(
+          session.adminId,
+          session.adminName,
+          id,
+          material.name,
+          oldQuantity,
+          updateData.quantity_current as number
+        )
       )
     }
 

@@ -9,6 +9,7 @@ import {
   DonationDetailModal,
   ManualDonationForm,
   MaterialsManagement,
+  AuditLogViewer,
 } from '@/components/admin'
 import {
   LogOut,
@@ -19,6 +20,7 @@ import {
   AlertCircle,
   Loader2,
   Home,
+  History,
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -49,6 +51,7 @@ export default function AdminPage() {
   const [showDetailModal, setShowDetailModal] = useState(false)
   const [showManualForm, setShowManualForm] = useState(false)
   const [showMaterialsModal, setShowMaterialsModal] = useState(false)
+  const [showAuditLog, setShowAuditLog] = useState(false)
 
   // Fetch pending donations
   const fetchPendingDonations = useCallback(async (isRefresh = false) => {
@@ -230,6 +233,13 @@ export default function AdminPage() {
           </Button>
           <Button
             variant="outline"
+            onClick={() => setShowAuditLog(true)}
+          >
+            <History className="w-4 h-4 mr-2" />
+            Historial
+          </Button>
+          <Button
+            variant="outline"
             onClick={() => fetchPendingDonations(true)}
             disabled={isRefreshing}
           >
@@ -329,6 +339,11 @@ export default function AdminPage() {
       <MaterialsManagement
         open={showMaterialsModal}
         onClose={() => setShowMaterialsModal(false)}
+      />
+
+      <AuditLogViewer
+        open={showAuditLog}
+        onClose={() => setShowAuditLog(false)}
       />
     </div>
   )

@@ -149,6 +149,53 @@ export type Database = {
           }
         ]
       }
+      audit_log: {
+        Row: {
+          id: string
+          action_type: string
+          admin_id: string | null
+          admin_name: string | null
+          target_type: string
+          target_id: string | null
+          old_value: Record<string, unknown> | null
+          new_value: Record<string, unknown> | null
+          description: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          action_type: string
+          admin_id?: string | null
+          admin_name?: string | null
+          target_type: string
+          target_id?: string | null
+          old_value?: Record<string, unknown> | null
+          new_value?: Record<string, unknown> | null
+          description: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          action_type?: string
+          admin_id?: string | null
+          admin_name?: string | null
+          target_type?: string
+          target_id?: string | null
+          old_value?: Record<string, unknown> | null
+          new_value?: Record<string, unknown> | null
+          description?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'audit_log_admin_id_fkey'
+            columns: ['admin_id']
+            isOneToOne: false
+            referencedRelation: 'admins'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -182,3 +229,31 @@ export type NewAdmin = Database['public']['Tables']['admins']['Insert']
 export type UpdateDonation = Database['public']['Tables']['donations']['Update']
 export type UpdateMaterial = Database['public']['Tables']['materials']['Update']
 export type UpdateFundraisingGoal = Database['public']['Tables']['fundraising_goal']['Update']
+
+// Audit log types
+export type AuditActionType = 'approve_donation' | 'reject_donation' | 'manual_donation' | 'update_material'
+export type AuditTargetType = 'donation' | 'material'
+
+export interface AuditLogEntry {
+  id: string
+  action_type: AuditActionType
+  admin_id: string | null
+  admin_name: string | null
+  target_type: AuditTargetType
+  target_id: string | null
+  old_value: Record<string, unknown> | null
+  new_value: Record<string, unknown> | null
+  description: string
+  created_at: string
+}
+
+export interface NewAuditLogEntry {
+  action_type: AuditActionType
+  admin_id?: string | null
+  admin_name?: string | null
+  target_type: AuditTargetType
+  target_id?: string | null
+  old_value?: Record<string, unknown> | null
+  new_value?: Record<string, unknown> | null
+  description: string
+}

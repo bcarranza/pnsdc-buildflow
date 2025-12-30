@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
+import { logAuditEvent, auditHelpers } from '@/lib/audit'
 
 export async function POST(
   request: NextRequest,
@@ -106,6 +107,17 @@ export async function POST(
           .eq('id', material.id)
       }
     }
+
+    // Log audit event
+    await logAuditEvent(
+      auditHelpers.approveDonation(
+        session.adminId,
+        session.adminName,
+        id,
+        null, // We don't have donor name in this context, could fetch if needed
+        donation.amount
+      )
+    )
 
     return NextResponse.json({
       success: true,

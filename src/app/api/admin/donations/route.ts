@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
+import { logAuditEvent, auditHelpers } from '@/lib/audit'
 
 // Sanitize string input
 function sanitizeString(input: string | null | undefined): string | null {
@@ -137,6 +138,17 @@ export async function POST(request: NextRequest) {
           .eq('id', material.id)
       }
     }
+
+    // Log audit event
+    await logAuditEvent(
+      auditHelpers.manualDonation(
+        session.adminId,
+        session.adminName,
+        donation.id,
+        isAnon ? null : sanitizedName,
+        parsedAmount
+      )
+    )
 
     return NextResponse.json({
       success: true,

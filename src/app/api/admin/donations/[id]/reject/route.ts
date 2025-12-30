@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { requireAuth } from '@/lib/auth'
+import { logAuditEvent, auditHelpers } from '@/lib/audit'
 
 export async function POST(
   request: NextRequest,
@@ -79,6 +80,18 @@ export async function POST(
         { status: 500 }
       )
     }
+
+    // Log audit event
+    await logAuditEvent(
+      auditHelpers.rejectDonation(
+        session.adminId,
+        session.adminName,
+        id,
+        null,
+        0, // Amount not fetched in this flow
+        rejectionReason || undefined
+      )
+    )
 
     return NextResponse.json({
       success: true,

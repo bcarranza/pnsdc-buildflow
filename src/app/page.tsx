@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Heart } from "lucide-react"
-import { Header, Thermometer, MaterialsList, DonorWall, ContactInfo, type Material, type Donation } from "@/components/dashboard"
+import { Header, ContactInfo, RealtimeDashboard, type Material, type Donation } from "@/components/dashboard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { createServerSupabaseClient } from "@/lib/supabase/server"
@@ -24,7 +24,7 @@ async function getDashboardData() {
       `)
       .eq('status', 'approved')
       .order('created_at', { ascending: false })
-      .limit(20),
+      .limit(100), // Increased for client-side filtering
   ])
 
   // Transform donations to flatten material name
@@ -79,53 +79,12 @@ export default async function Home() {
       </div>
 
       <main className="container mx-auto px-4 py-6 md:py-8 max-w-4xl flex-1">
-        {/* Thermometer Section */}
-        <section className="mb-6 md:mb-8" aria-label="Progreso de recaudación">
-          <Card className="border-amber-200 shadow-sm">
-            <CardHeader className="text-center pb-2">
-              <CardTitle className="text-xl md:text-2xl text-amber-800">
-                Meta de Recaudación
-              </CardTitle>
-              <p className="text-gray-600">
-                Para julio 2025
-              </p>
-            </CardHeader>
-            <CardContent>
-              <Thermometer
-                currentAmount={fundraising.current_amount}
-                goalAmount={fundraising.goal_amount}
-              />
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Materials Section */}
-        <section className="mb-6 md:mb-8" aria-label="Lista de materiales">
-          <Card className="border-amber-200 shadow-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xl text-amber-800">
-                Materiales de Construcción
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MaterialsList materials={materials} />
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Donor Wall Section */}
-        <section className="mb-6 md:mb-8" aria-label="Muro de donantes">
-          <Card className="border-amber-200 shadow-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xl text-amber-800">
-                Muro de Donantes
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <DonorWall donations={donations} />
-            </CardContent>
-          </Card>
-        </section>
+        {/* Realtime Dashboard with Thermometer, Materials, and Donor Wall */}
+        <RealtimeDashboard
+          initialFundraising={fundraising}
+          initialMaterials={materials}
+          initialDonations={donations}
+        />
 
         {/* Contact Section */}
         <section aria-label="Información de contacto">
