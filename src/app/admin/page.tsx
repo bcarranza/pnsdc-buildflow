@@ -10,6 +10,7 @@ import {
   ManualDonationForm,
   MaterialsManagement,
   AuditLogViewer,
+  VisualSettings,
 } from '@/components/admin'
 import {
   LogOut,
@@ -21,6 +22,7 @@ import {
   Loader2,
   Home,
   History,
+  Palette,
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -52,6 +54,7 @@ export default function AdminPage() {
   const [showManualForm, setShowManualForm] = useState(false)
   const [showMaterialsModal, setShowMaterialsModal] = useState(false)
   const [showAuditLog, setShowAuditLog] = useState(false)
+  const [showVisualSettings, setShowVisualSettings] = useState(false)
 
   // Fetch pending donations
   const fetchPendingDonations = useCallback(async (isRefresh = false) => {
@@ -240,6 +243,13 @@ export default function AdminPage() {
           </Button>
           <Button
             variant="outline"
+            onClick={() => setShowVisualSettings(true)}
+          >
+            <Palette className="w-4 h-4 mr-2" />
+            Visual
+          </Button>
+          <Button
+            variant="outline"
             onClick={() => fetchPendingDonations(true)}
             disabled={isRefreshing}
           >
@@ -344,6 +354,11 @@ export default function AdminPage() {
       <AuditLogViewer
         open={showAuditLog}
         onClose={() => setShowAuditLog(false)}
+      />
+
+      <VisualSettings
+        open={showVisualSettings}
+        onClose={() => setShowVisualSettings(false)}
       />
     </div>
   )

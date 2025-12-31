@@ -1,12 +1,13 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useRealtimeDashboard } from '@/hooks/useRealtimeDashboard'
-import { Thermometer } from './Thermometer'
 import { MaterialsList, type Material } from './MaterialsList'
 import { DonorWallWithFilters } from './DonorWallWithFilters'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Wifi, WifiOff, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ProgressVisual, type ProgressVisualType } from '@/components/progress'
 
 interface Donation {
   id: string
@@ -31,6 +32,8 @@ export function RealtimeDashboard({
   initialMaterials,
   initialDonations,
 }: RealtimeDashboardProps) {
+  const [visualType, setVisualType] = useState<ProgressVisualType>('mountain')
+
   const { data, isConnected, lastUpdated, refresh } = useRealtimeDashboard({
     initialData: {
       fundraising: initialFundraising,
@@ -38,6 +41,22 @@ export function RealtimeDashboard({
       donations: initialDonations,
     },
   })
+
+  // Fetch site settings for progress visual type
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('/api/settings')
+        const data = await response.json()
+        if (data.success && data.settings?.progress_visual) {
+          setVisualType(data.settings.progress_visual as ProgressVisualType)
+        }
+      } catch (error) {
+        console.error('Error fetching settings:', error)
+      }
+    }
+    fetchSettings()
+  }, [])
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('es-GT', {
@@ -75,17 +94,18 @@ export function RealtimeDashboard({
         </Button>
       </div>
 
-      {/* Thermometer Section */}
+      {/* Progress Visual Section */}
       <section className="mb-6 md:mb-8" aria-label="Progreso de recaudación">
-        <Card className="border-carmelite-200 shadow-sm">
+        <Card className="border-carmelite-200 shadow-sm overflow-hidden">
           <CardHeader className="text-center pb-2">
             <CardTitle className="text-xl md:text-2xl text-carmelite-800">
               Meta de Recaudación
             </CardTitle>
             <p className="text-gray-600">Para julio 2025</p>
           </CardHeader>
-          <CardContent>
-            <Thermometer
+          <CardContent className="py-6">
+            <ProgressVisual
+              visualType={visualType}
               currentAmount={data.fundraising.current_amount}
               goalAmount={data.fundraising.goal_amount}
             />
