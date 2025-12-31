@@ -17,114 +17,129 @@ export function Header() {
       <div className="relative container mx-auto px-4 py-8 md:py-10">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
 
-          {/* Virgin Mary of Mount Carmel SVG Illustration */}
-          <div className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+          {/* Virgin Mary of Mount Carmel - Cleaner Icon Style */}
+          <div className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0">
             <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl">
               <defs>
-                {/* Crown gold gradient */}
-                <linearGradient id="crownGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F6E05E" />
-                  <stop offset="50%" stopColor="#D69E2E" />
-                  <stop offset="100%" stopColor="#B7791F" />
+                {/* Halo gradient */}
+                <radialGradient id="haloGradient" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#FEF3C7" />
+                  <stop offset="60%" stopColor="#FBBF24" />
+                  <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.3" />
+                </radialGradient>
+
+                {/* Gold gradient */}
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FEF08A" />
+                  <stop offset="50%" stopColor="#FBBF24" />
+                  <stop offset="100%" stopColor="#F59E0B" />
                 </linearGradient>
 
-                {/* Veil gradient */}
-                <linearGradient id="veilGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#E8D5B7" />
-                  <stop offset="100%" stopColor="#C9B896" />
+                {/* Face skin tone */}
+                <radialGradient id="skinTone" cx="50%" cy="40%" r="50%">
+                  <stop offset="0%" stopColor="#FDEBD0" />
+                  <stop offset="100%" stopColor="#DDB892" />
+                </radialGradient>
+
+                {/* Blue mantle gradient */}
+                <linearGradient id="mantleBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#1E3A5F" />
+                  <stop offset="50%" stopColor="#2563EB" />
+                  <stop offset="100%" stopColor="#1E40AF" />
                 </linearGradient>
 
-                {/* Mantle brown gradient */}
-                <linearGradient id="mantleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B6914" />
-                  <stop offset="50%" stopColor="#6B4423" />
+                {/* White veil */}
+                <linearGradient id="veilWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#FFFFFF" />
+                  <stop offset="100%" stopColor="#E5E7EB" />
+                </linearGradient>
+
+                {/* Brown robe (Carmelite) */}
+                <linearGradient id="robeBrown" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#92400E" />
+                  <stop offset="50%" stopColor="#78350F" />
                   <stop offset="100%" stopColor="#5D3A1A" />
                 </linearGradient>
 
-                {/* Halo glow */}
-                <radialGradient id="haloGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#FEF3C7" stopOpacity="0.8" />
-                  <stop offset="70%" stopColor="#F59E0B" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#D97706" stopOpacity="0" />
-                </radialGradient>
-
-                {/* Star gradient */}
-                <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#FFFFFF" />
-                  <stop offset="50%" stopColor="#FEF08A" />
-                  <stop offset="100%" stopColor="#FBBF24" />
-                </radialGradient>
-
-                {/* Face gradient */}
-                <radialGradient id="faceGradient" cx="40%" cy="30%" r="60%">
-                  <stop offset="0%" stopColor="#FDEBD0" />
-                  <stop offset="100%" stopColor="#E8CEBB" />
-                </radialGradient>
-
                 {/* Glow filter */}
-                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2" result="glow" />
+                <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
                   <feMerge>
-                    <feMergeNode in="glow" />
+                    <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
               </defs>
 
-              {/* Halo/Aureole */}
-              <circle cx="50" cy="35" r="28" fill="url(#haloGlow)" />
+              {/* Circular halo behind */}
+              <circle cx="50" cy="32" r="22" fill="url(#haloGradient)" filter="url(#glowEffect)" />
 
-              {/* 12 Stars around crown (Apocalypse 12:1) */}
-              {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => {
-                const radius = 24
-                const x = 50 + Math.cos((angle - 90) * Math.PI / 180) * radius
-                const y = 28 + Math.sin((angle - 90) * Math.PI / 180) * radius * 0.6
-                return (
-                  <g key={i} transform={`translate(${x}, ${y})`} filter="url(#softGlow)">
-                    <path
-                      d="M0 -3 L0.7 -0.9 L3 -0.9 L1.2 0.4 L1.9 2.5 L0 1.2 L-1.9 2.5 L-1.2 0.4 L-3 -0.9 L-0.7 -0.9 Z"
-                      fill="url(#starGlow)"
-                      opacity={i < 6 ? 1 : 0.8}
-                    />
-                  </g>
-                )
-              })}
+              {/* Crown with 12 stars */}
+              <g filter="url(#glowEffect)">
+                {/* Crown base */}
+                <path
+                  d="M32 24 L36 14 L42 20 L50 10 L58 20 L64 14 L68 24 L64 26 L36 26 Z"
+                  fill="url(#goldGradient)"
+                />
+                {/* Crown jewels */}
+                <circle cx="50" cy="16" r="2" fill="#FFFFFF" />
+                <circle cx="40" cy="19" r="1.5" fill="#FFFFFF" />
+                <circle cx="60" cy="19" r="1.5" fill="#FFFFFF" />
+              </g>
 
-              {/* Crown */}
+              {/* White veil/head covering */}
               <path
-                d="M35 25 L40 18 L45 23 L50 15 L55 23 L60 18 L65 25 L62 28 L38 28 Z"
-                fill="url(#crownGold)"
-                filter="url(#softGlow)"
+                d="M30 28 Q30 26 36 24 L64 24 Q70 26 70 28 Q72 40 68 55 Q65 65 50 68 Q35 65 32 55 Q28 40 30 28 Z"
+                fill="url(#veilWhite)"
               />
 
               {/* Face */}
-              <ellipse cx="50" cy="35" rx="10" ry="12" fill="url(#faceGradient)" />
+              <ellipse cx="50" cy="38" rx="12" ry="14" fill="url(#skinTone)" />
 
-              {/* Veil */}
+              {/* Simple facial features */}
+              <ellipse cx="46" cy="36" rx="1.5" ry="1" fill="#5D4037" /> {/* Left eye */}
+              <ellipse cx="54" cy="36" rx="1.5" ry="1" fill="#5D4037" /> {/* Right eye */}
+              <path d="M48 42 Q50 44 52 42" fill="none" stroke="#8D6E63" strokeWidth="0.8" /> {/* Smile */}
+
+              {/* Blue mantle/cloak */}
               <path
-                d="M35 30 Q35 45 40 60 Q45 70 50 72 Q55 70 60 60 Q65 45 65 30 Q60 28 50 28 Q40 28 35 30 Z"
-                fill="url(#veilGradient)"
+                d="M25 50 Q20 70 25 95 L75 95 Q80 70 75 50 Q70 55 50 55 Q30 55 25 50 Z"
+                fill="url(#mantleBlue)"
               />
 
-              {/* Mantle/Robe (Carmelite brown) */}
+              {/* Brown inner robe (Carmelite) */}
               <path
-                d="M30 50 Q25 75 30 95 L70 95 Q75 75 70 50 Q65 55 50 55 Q35 55 30 50 Z"
-                fill="url(#mantleGradient)"
+                d="M38 55 Q36 75 38 95 L62 95 Q64 75 62 55 Q56 58 50 58 Q44 58 38 55 Z"
+                fill="url(#robeBrown)"
               />
 
-              {/* Scapular detail */}
-              <rect x="45" y="55" width="10" height="25" rx="2" fill="#E8D5B7" opacity="0.8" />
-
-              {/* Baby Jesus suggestion (simplified) */}
-              <ellipse cx="42" cy="68" rx="6" ry="5" fill="url(#faceGradient)" opacity="0.9" />
-              <ellipse cx="42" cy="75" rx="5" ry="8" fill="#E8D5B7" opacity="0.8" />
-
-              {/* Mount Carmel silhouette at bottom */}
+              {/* Hands in prayer position */}
               <path
-                d="M10 95 L25 80 L40 88 L50 78 L60 88 L75 80 L90 95 Z"
-                fill="#3D2314"
-                opacity="0.3"
+                d="M44 70 Q48 65 50 65 Q52 65 56 70 L54 80 Q50 82 46 80 Z"
+                fill="url(#skinTone)"
               />
+
+              {/* Scapular (brown rectangle with Mary symbol) */}
+              <rect x="46" y="72" width="8" height="14" rx="1" fill="#D4A574" />
+              <text x="50" y="82" textAnchor="middle" fontSize="6" fill="#5D3A1A" fontWeight="bold">M</text>
+
+              {/* 12 small stars around halo */}
+              {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => {
+                const r = 28
+                const x = 50 + Math.cos((angle - 90) * Math.PI / 180) * r
+                const y = 32 + Math.sin((angle - 90) * Math.PI / 180) * r * 0.7
+                if (y > 50) return null // Don't show stars behind body
+                return (
+                  <circle
+                    key={i}
+                    cx={x}
+                    cy={y}
+                    r="2"
+                    fill="#FBBF24"
+                    filter="url(#glowEffect)"
+                  />
+                )
+              })}
             </svg>
           </div>
 
@@ -140,10 +155,10 @@ export function Header() {
               Jalapa, Guatemala
             </p>
 
-            {/* Project banner with glassmorphism */}
+            {/* Project banner - CLEAR WHITE TEXT */}
             <div className="mt-4 inline-block">
-              <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl px-6 py-3 shadow-xl">
-                <p className="text-lg md:text-xl font-semibold bg-gradient-to-r from-gold-300 via-gold-400 to-gold-300 bg-clip-text text-transparent">
+              <div className="backdrop-blur-md bg-gold-500/20 border border-gold-400/40 rounded-2xl px-6 py-3 shadow-xl">
+                <p className="text-lg md:text-xl font-bold text-white drop-shadow-md">
                   Construcción del Nuevo Salón Parroquial
                 </p>
               </div>
