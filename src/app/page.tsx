@@ -65,13 +65,13 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-carmelite-50 to-white flex flex-col">
       <Header />
 
       {/* Donation CTA */}
       <div className="container mx-auto px-4 pt-6 max-w-4xl">
         <Link href="/donar" className="block">
-          <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold min-h-[56px] text-lg shadow-lg hover:shadow-xl transition-all">
+          <Button className="w-full bg-carmelite-500 hover:bg-carmelite-600 text-white font-semibold min-h-[56px] text-lg shadow-lg hover:shadow-xl transition-all">
             <Heart className="mr-2 h-5 w-5" />
             Registrar mi Donación
           </Button>
@@ -88,9 +88,9 @@ export default async function Home() {
 
         {/* Contact Section */}
         <section aria-label="Información de contacto">
-          <Card className="border-amber-200 shadow-sm">
+          <Card className="border-carmelite-200 shadow-sm">
             <CardHeader className="pb-2">
-              <CardTitle className="text-xl text-amber-800">
+              <CardTitle className="text-xl text-carmelite-800">
                 Información de Contacto
               </CardTitle>
             </CardHeader>
@@ -101,7 +101,7 @@ export default async function Home() {
         </section>
       </main>
 
-      <footer className="py-6 text-center text-gray-500 text-sm border-t border-amber-100">
+      <footer className="py-6 text-center text-gray-500 text-sm border-t border-carmelite-100">
         <p>© 2025 Parroquia Nuestra Señora del Carmen</p>
         <p className="mt-1">Construyendo juntos un espacio para nuestra comunidad</p>
       </footer>

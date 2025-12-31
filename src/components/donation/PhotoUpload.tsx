@@ -121,10 +121,10 @@ export function PhotoUpload({
             "relative border-2 border-dashed rounded-lg p-6 cursor-pointer transition-colors",
             "flex flex-col items-center justify-center min-h-[160px]",
             isDragging
-              ? "border-amber-500 bg-amber-50"
+              ? "border-carmelite-500 bg-carmelite-50"
               : error
               ? "border-red-300 bg-red-50"
-              : "border-gray-300 hover:border-amber-400 hover:bg-amber-50/50"
+              : "border-gray-300 hover:border-carmelite-400 hover:bg-carmelite-50/50"
           )}
         >
           <Upload className="h-10 w-10 text-gray-400 mb-3" />
@@ -146,7 +146,7 @@ export function PhotoUpload({
                 e.stopPropagation()
                 fileInputRef.current?.click()
               }}
-              className="flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-700 rounded-lg text-sm font-medium hover:bg-amber-200 transition-colors min-h-[48px]"
+              className="flex items-center gap-2 px-4 py-2 bg-carmelite-100 text-carmelite-700 rounded-lg text-sm font-medium hover:bg-carmelite-200 transition-colors min-h-[48px]"
             >
               <Camera className="h-5 w-5" />
               <span className="hidden sm:inline">Tomar foto</span>
@@ -165,12 +165,12 @@ export function PhotoUpload({
           />
         </div>
       ) : isCompressing ? (
-        <div className="border-2 border-amber-300 bg-amber-50 rounded-lg p-6 flex flex-col items-center justify-center min-h-[160px]">
-          <Loader2 className="h-10 w-10 text-amber-500 animate-spin mb-3" />
-          <p className="text-sm font-medium text-amber-700">
+        <div className="border-2 border-carmelite-300 bg-carmelite-50 rounded-lg p-6 flex flex-col items-center justify-center min-h-[160px]">
+          <Loader2 className="h-10 w-10 text-carmelite-500 animate-spin mb-3" />
+          <p className="text-sm font-medium text-carmelite-700">
             Comprimiendo imagen...
           </p>
-          <p className="text-xs text-amber-600 mt-1">
+          <p className="text-xs text-carmelite-600 mt-1">
             {compressionProgress}% completado
           </p>
         </div>

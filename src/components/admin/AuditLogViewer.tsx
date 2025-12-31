@@ -43,7 +43,7 @@ interface AuditLogViewerProps {
 const actionIcons: Record<string, React.ReactNode> = {
   approve_donation: <CheckCircle className="w-4 h-4 text-green-500" />,
   reject_donation: <XCircle className="w-4 h-4 text-red-500" />,
-  manual_donation: <Plus className="w-4 h-4 text-amber-500" />,
+  manual_donation: <Plus className="w-4 h-4 text-carmelite-500" />,
   update_material: <Edit className="w-4 h-4 text-blue-500" />,
 }
 
@@ -148,7 +148,7 @@ export default function AuditLogViewer({ open, onClose }: AuditLogViewerProps) {
           {/* Loading state */}
           {isLoading && logs.length === 0 && (
             <div className="flex items-center justify-center py-8">
-              <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
+              <Loader2 className="w-6 h-6 animate-spin text-carmelite-500" />
             </div>
           )}
 

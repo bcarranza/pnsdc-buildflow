@@ -55,7 +55,7 @@ export default function PendingDonationCard({ donation, onViewDetails }: Pending
             </div>
 
             {/* Amount - prominent display */}
-            <div className="text-xl font-bold text-amber-600 mb-2">
+            <div className="text-xl font-bold text-carmelite-600 mb-2">
               {formatAmount(donation.amount)}
             </div>
 

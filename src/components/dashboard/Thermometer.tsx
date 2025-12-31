@@ -12,6 +12,16 @@ function formatCurrency(amount: number): string {
   return `Q${amount.toLocaleString('es-GT')}`
 }
 
+function formatCompactCurrency(amount: number): string {
+  if (amount >= 1000000) {
+    return `Q${(amount / 1000000).toFixed(1)}M`
+  }
+  if (amount >= 1000) {
+    return `Q${(amount / 1000).toFixed(1)}K`
+  }
+  return `Q${amount.toLocaleString('es-GT')}`
+}
+
 export function Thermometer({ currentAmount, goalAmount, className = '' }: ThermometerProps) {
   const [animatedPercentage, setAnimatedPercentage] = useState(0)
 
@@ -28,28 +38,31 @@ export function Thermometer({ currentAmount, goalAmount, className = '' }: Therm
 
   return (
     <div
-      className={`flex flex-col items-center ${className}`}
+      className={`flex flex-col items-center w-full max-w-xs mx-auto ${className}`}
       role="progressbar"
       aria-valuenow={currentAmount}
       aria-valuemin={0}
       aria-valuemax={goalAmount}
       aria-label={`Progreso de recaudación: ${displayPercentage}% alcanzado, ${formatCurrency(currentAmount)} de ${formatCurrency(goalAmount)}`}
     >
-      {/* Amount Display */}
-      <div className="text-center mb-4">
-        <div className="text-4xl md:text-5xl font-bold text-amber-600">
-          {formatCurrency(currentAmount)}
+      {/* Amount Display - Responsive */}
+      <div className="text-center mb-4 w-full px-2">
+        <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-carmelite-600 break-words">
+          <span className="hidden sm:inline">{formatCurrency(currentAmount)}</span>
+          <span className="sm:hidden">{formatCompactCurrency(currentAmount)}</span>
         </div>
-        <div className="text-gray-500 mt-1">
-          de {formatCurrency(goalAmount)}
+        <div className="text-gray-500 mt-1 text-sm sm:text-base">
+          de <span className="hidden sm:inline">{formatCurrency(goalAmount)}</span>
+          <span className="sm:hidden">{formatCompactCurrency(goalAmount)}</span>
         </div>
       </div>
 
-      {/* Thermometer SVG */}
-      <div className="relative w-24 h-64 md:w-28 md:h-72">
+      {/* Thermometer SVG - Responsive container */}
+      <div className="relative w-full max-w-[120px] aspect-[120/280]">
         <svg
-          viewBox="0 0 100 280"
+          viewBox="0 0 120 280"
           className="w-full h-full"
+          preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
         >
           {/* Thermometer outline */}
@@ -64,20 +77,20 @@ export function Thermometer({ currentAmount, goalAmount, className = '' }: Therm
 
           {/* Background */}
           <g clipPath="url(#thermometer-clip)">
-            <rect x="0" y="0" width="100" height="280" className="fill-amber-100" />
+            <rect x="0" y="0" width="120" height="280" className="fill-carmelite-100" />
           </g>
 
           {/* Fill - animated */}
           <g clipPath="url(#thermometer-clip)">
             {/* Bulb fill (always full) */}
-            <circle cx="50" cy="230" r="40" className="fill-amber-500" />
+            <circle cx="50" cy="230" r="40" className="fill-carmelite-500" />
             {/* Tube fill */}
             <rect
               x="30"
               y={200 - (animatedPercentage / 100) * 180}
               width="40"
               height={(animatedPercentage / 100) * 180 + 30}
-              className="fill-amber-500 transition-all duration-1000 ease-out"
+              className="fill-carmelite-500 transition-all duration-1000 ease-out"
             />
           </g>
 
@@ -94,24 +107,24 @@ export function Thermometer({ currentAmount, goalAmount, className = '' }: Therm
                C28 188 30 185 30 180
                L30 40
                C30 27 37 20 50 20 Z"
-            className="fill-none stroke-amber-600 stroke-2"
+            className="fill-none stroke-carmelite-600 stroke-2"
           />
 
-          {/* Tick marks */}
+          {/* Tick marks - adjusted position for visibility */}
           {[0, 25, 50, 75, 100].map((tick) => (
             <g key={tick}>
               <line
                 x1="72"
                 y1={200 - (tick / 100) * 180}
-                x2="82"
+                x2="80"
                 y2={200 - (tick / 100) * 180}
-                className="stroke-amber-600 stroke-1"
+                className="stroke-carmelite-600 stroke-1"
               />
               <text
-                x="88"
+                x="84"
                 y={204 - (tick / 100) * 180}
-                className="fill-amber-700 text-xs"
-                fontSize="10"
+                className="fill-carmelite-700"
+                fontSize="9"
               >
                 {tick}%
               </text>
@@ -122,10 +135,10 @@ export function Thermometer({ currentAmount, goalAmount, className = '' }: Therm
 
       {/* Percentage Display */}
       <div className="mt-4 text-center">
-        <span className="text-2xl md:text-3xl font-bold text-amber-600">
+        <span className="text-xl sm:text-2xl md:text-3xl font-bold text-carmelite-600">
           {displayPercentage}%
         </span>
-        <span className="text-gray-600 ml-2">
+        <span className="text-gray-600 ml-2 text-sm sm:text-base">
           alcanzado
         </span>
       </div>

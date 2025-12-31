@@ -4,10 +4,10 @@ import { Home, AlertCircle } from 'lucide-react'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-carmelite-50 to-white flex items-center justify-center p-4">
       <div className="text-center max-w-md">
-        <div className="mx-auto w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-          <AlertCircle className="w-10 h-10 text-amber-600" />
+        <div className="mx-auto w-20 h-20 bg-carmelite-100 rounded-full flex items-center justify-center mb-6">
+          <AlertCircle className="w-10 h-10 text-carmelite-600" />
         </div>
 
         <h1 className="text-4xl font-bold text-gray-900 mb-2">404</h1>
@@ -19,7 +19,7 @@ export default function NotFound() {
         </p>
 
         <Link href="/">
-          <Button className="bg-amber-500 hover:bg-amber-600 text-white">
+          <Button className="bg-carmelite-500 hover:bg-carmelite-600 text-white">
             <Home className="w-4 h-4 mr-2" />
             Volver al inicio
           </Button>

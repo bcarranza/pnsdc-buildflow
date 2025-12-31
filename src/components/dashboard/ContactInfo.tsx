@@ -50,27 +50,27 @@ export function ContactInfo() {
     <div className="space-y-6">
       {/* Address & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="flex items-start gap-3 p-4 bg-amber-50 rounded-lg">
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-            <MapPin className="w-5 h-5 text-amber-600" aria-hidden="true" />
+        <div className="flex items-start gap-3 p-4 bg-carmelite-50 rounded-lg">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-carmelite-100 flex items-center justify-center">
+            <MapPin className="w-5 h-5 text-carmelite-600" aria-hidden="true" />
           </div>
           <div>
-            <h3 className="font-medium text-amber-800 mb-1">Dirección</h3>
+            <h3 className="font-medium text-carmelite-800 mb-1">Dirección</h3>
             <p className="text-gray-700 text-sm">
               {contactData.parish.address}
             </p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-4 bg-amber-50 rounded-lg">
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-            <Phone className="w-5 h-5 text-amber-600" aria-hidden="true" />
+        <div className="flex items-start gap-3 p-4 bg-carmelite-50 rounded-lg">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-carmelite-100 flex items-center justify-center">
+            <Phone className="w-5 h-5 text-carmelite-600" aria-hidden="true" />
           </div>
           <div>
-            <h3 className="font-medium text-amber-800 mb-1">Teléfono</h3>
+            <h3 className="font-medium text-carmelite-800 mb-1">Teléfono</h3>
             <a
               href={`tel:${contactData.parish.phone.replace(/\s/g, '')}`}
-              className="text-amber-600 hover:text-amber-700 font-medium text-sm underline"
+              className="text-carmelite-600 hover:text-carmelite-700 font-medium text-sm underline"
               aria-label="Llamar al teléfono de la parroquia"
             >
               {contactData.parish.phone}
@@ -80,10 +80,10 @@ export function ContactInfo() {
       </div>
 
       {/* Bank Account */}
-      <div className="p-4 bg-white border border-amber-200 rounded-lg">
+      <div className="p-4 bg-white border border-carmelite-200 rounded-lg">
         <div className="flex items-center gap-2 mb-4">
-          <Building2 className="w-5 h-5 text-amber-600" aria-hidden="true" />
-          <h3 className="font-medium text-amber-800">Datos Bancarios</h3>
+          <Building2 className="w-5 h-5 text-carmelite-600" aria-hidden="true" />
+          <h3 className="font-medium text-carmelite-800">Datos Bancarios</h3>
         </div>
 
         <div className="space-y-3 text-sm">
@@ -102,7 +102,7 @@ export function ContactInfo() {
                 variant="outline"
                 size="sm"
                 onClick={handleCopyAccount}
-                className="h-8 px-2 border-amber-300 hover:bg-amber-50"
+                className="h-8 px-2 border-carmelite-300 hover:bg-carmelite-50"
                 aria-label={copied ? 'Número de cuenta copiado' : 'Copiar número de cuenta'}
               >
                 {copied ? (
@@ -112,8 +112,8 @@ export function ContactInfo() {
                   </>
                 ) : (
                   <>
-                    <Copy className="w-4 h-4 text-amber-600" />
-                    <span className="ml-1 text-amber-600 text-xs">Copiar</span>
+                    <Copy className="w-4 h-4 text-carmelite-600" />
+                    <span className="ml-1 text-carmelite-600 text-xs">Copiar</span>
                   </>
                 )}
               </Button>

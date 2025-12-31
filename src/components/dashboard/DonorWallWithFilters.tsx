@@ -50,21 +50,21 @@ function DonorCard({ donation }: DonorCardProps) {
 
   return (
     <div
-      className="bg-white rounded-lg border border-amber-100 p-4 shadow-sm hover:shadow-md transition-shadow"
+      className="bg-white rounded-lg border border-carmelite-100 p-4 shadow-sm hover:shadow-md transition-shadow"
       role="listitem"
       aria-label={`Donación de ${displayName}: ${formatCurrency(amount)}`}
     >
       <div className="flex items-start gap-3">
-        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-carmelite-100 flex items-center justify-center">
           {is_anonymous ? (
-            <Heart className="w-5 h-5 text-amber-600" aria-hidden="true" />
+            <Heart className="w-5 h-5 text-carmelite-600" aria-hidden="true" />
           ) : (
-            <User className="w-5 h-5 text-amber-600" aria-hidden="true" />
+            <User className="w-5 h-5 text-carmelite-600" aria-hidden="true" />
           )}
         </div>
         <div className="flex-1 min-w-0">
           <h3 className="font-medium text-gray-800 truncate">{displayName}</h3>
-          <p className="text-xl font-bold text-amber-600">{formatCurrency(amount)}</p>
+          <p className="text-xl font-bold text-carmelite-600">{formatCurrency(amount)}</p>
           {material_name && (
             <p className="text-sm text-gray-500 truncate">Para: {material_name}</p>
           )}
@@ -147,8 +147,8 @@ export function DonorWallWithFilters({
   if (donations.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
-          <Heart className="w-8 h-8 text-amber-500" aria-hidden="true" />
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-carmelite-100 flex items-center justify-center">
+          <Heart className="w-8 h-8 text-carmelite-500" aria-hidden="true" />
         </div>
         <h3 className="text-lg font-medium text-gray-700 mb-2">
           Aún no hay donaciones
@@ -229,7 +229,7 @@ export function DonorWallWithFilters({
           <Button
             variant="link"
             onClick={clearFilters}
-            className="text-amber-600"
+            className="text-carmelite-600"
           >
             Ver todas las donaciones
           </Button>
@@ -254,7 +254,7 @@ export function DonorWallWithFilters({
               <Button
                 variant="outline"
                 onClick={handleLoadMore}
-                className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                className="border-carmelite-300 text-carmelite-700 hover:bg-carmelite-50"
               >
                 Ver más donaciones ({processedDonations.length - displayCount} restantes)
               </Button>

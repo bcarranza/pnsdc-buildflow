@@ -75,11 +75,11 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-carmelite-50 to-white flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="text-center space-y-2">
-          <div className="mx-auto w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-2">
-            <Lock className="w-8 h-8 text-amber-600" />
+          <div className="mx-auto w-16 h-16 bg-carmelite-100 rounded-full flex items-center justify-center mb-2">
+            <Lock className="w-8 h-8 text-carmelite-600" />
           </div>
           <CardTitle className="text-2xl font-bold text-gray-900">
             Panel de Administración
@@ -124,14 +124,14 @@ export default function AdminLoginPage() {
             )}
 
             {attemptsRemaining !== null && attemptsRemaining > 0 && attemptsRemaining < 3 && (
-              <p className="text-sm text-amber-600 text-center">
+              <p className="text-sm text-carmelite-600 text-center">
                 {attemptsRemaining} intento{attemptsRemaining !== 1 ? 's' : ''} restante{attemptsRemaining !== 1 ? 's' : ''}
               </p>
             )}
 
             <Button
               type="submit"
-              className="w-full h-12 bg-amber-500 hover:bg-amber-600 text-white font-medium"
+              className="w-full h-12 bg-carmelite-500 hover:bg-carmelite-600 text-white font-medium"
               disabled={isLoading || cooldown > 0 || pin.length < 4}
             >
               {isLoading ? (
@@ -150,7 +150,7 @@ export default function AdminLoginPage() {
           <div className="mt-6 text-center">
             <a
               href="/"
-              className="text-sm text-gray-500 hover:text-amber-600 transition-colors"
+              className="text-sm text-gray-500 hover:text-carmelite-600 transition-colors"
             >
               Volver al inicio
             </a>

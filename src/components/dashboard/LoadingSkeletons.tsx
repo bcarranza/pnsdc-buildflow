@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 export function ThermometerSkeleton() {
   return (
-    <Card className="border-amber-200 shadow-sm animate-pulse">
+    <Card className="border-carmelite-200 shadow-sm animate-pulse">
       <CardHeader className="text-center pb-2">
         <div className="h-7 bg-gray-200 rounded w-48 mx-auto mb-2" />
         <div className="h-5 bg-gray-200 rounded w-32 mx-auto" />
@@ -23,7 +23,7 @@ export function ThermometerSkeleton() {
 
 export function MaterialsListSkeleton() {
   return (
-    <Card className="border-amber-200 shadow-sm animate-pulse">
+    <Card className="border-carmelite-200 shadow-sm animate-pulse">
       <CardHeader className="pb-2">
         <div className="h-6 bg-gray-200 rounded w-56" />
       </CardHeader>
@@ -46,7 +46,7 @@ export function MaterialsListSkeleton() {
 
 export function DonorWallSkeleton() {
   return (
-    <Card className="border-amber-200 shadow-sm animate-pulse">
+    <Card className="border-carmelite-200 shadow-sm animate-pulse">
       <CardHeader className="pb-2">
         <div className="h-6 bg-gray-200 rounded w-40" />
       </CardHeader>
@@ -59,7 +59,7 @@ export function DonorWallSkeleton() {
         {/* Grid skeleton */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-white rounded-lg border border-amber-100 p-4">
+            <div key={i} className="bg-white rounded-lg border border-carmelite-100 p-4">
               <div className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-full bg-gray-200" />
                 <div className="flex-1 space-y-2">

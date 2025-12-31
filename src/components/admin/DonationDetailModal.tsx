@@ -135,9 +135,9 @@ export default function DonationDetailModal({
             </div>
 
             {/* Amount - prominent */}
-            <div className="p-4 bg-amber-50 rounded-lg text-center">
-              <p className="text-sm text-amber-700 mb-1">Monto de la donación</p>
-              <p className="text-3xl font-bold text-amber-600">
+            <div className="p-4 bg-carmelite-50 rounded-lg text-center">
+              <p className="text-sm text-carmelite-700 mb-1">Monto de la donación</p>
+              <p className="text-3xl font-bold text-carmelite-600">
                 {formatAmount(donation.amount)}
               </p>
             </div>

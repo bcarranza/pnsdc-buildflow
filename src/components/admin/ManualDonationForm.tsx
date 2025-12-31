@@ -226,7 +226,7 @@ export default function ManualDonationForm({ open, onClose, onSubmit }: ManualDo
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-carmelite-500 hover:bg-carmelite-600"
             >
               {isSubmitting ? (
                 <>

@@ -23,21 +23,21 @@ export default async function DonarPage() {
   const materials = await getMaterials()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-carmelite-50 to-white flex flex-col">
       {/* Header */}
-      <header className="bg-white border-b border-amber-100 sticky top-0 z-10">
+      <header className="bg-white border-b border-carmelite-100 sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 max-w-4xl">
           <div className="flex items-center gap-4">
             <Link
               href="/"
-              className="flex items-center gap-2 text-amber-700 hover:text-amber-800 transition-colors min-h-[48px] min-w-[48px] justify-center"
+              className="flex items-center gap-2 text-carmelite-700 hover:text-carmelite-800 transition-colors min-h-[48px] min-w-[48px] justify-center"
               aria-label="Volver al inicio"
             >
               <ArrowLeft className="h-5 w-5" />
               <span className="hidden sm:inline">Volver</span>
             </Link>
             <div className="flex-1 text-center">
-              <h1 className="text-lg font-semibold text-amber-800">
+              <h1 className="text-lg font-semibold text-carmelite-800">
                 Registrar Donación
               </h1>
               <p className="text-xs text-gray-600 hidden sm:block">
@@ -55,7 +55,7 @@ export default async function DonarPage() {
       </main>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-gray-500 text-xs border-t border-amber-100">
+      <footer className="py-4 text-center text-gray-500 text-xs border-t border-carmelite-100">
         <p>© 2025 Parroquia Nuestra Señora del Carmen</p>
       </footer>
     </div>

@@ -23,7 +23,7 @@ function MaterialItem({ material }: MaterialItemProps) {
       className={`p-4 rounded-lg border ${
         isCompleted
           ? 'bg-green-50 border-green-200'
-          : 'bg-white border-amber-100'
+          : 'bg-white border-carmelite-100'
       }`}
       role="listitem"
       aria-label={`${name}: ${quantity_current} de ${quantity_needed} ${unit}, ${Math.round(percentage)}% completado`}
@@ -56,11 +56,11 @@ function MaterialItem({ material }: MaterialItemProps) {
       <div className="flex items-center gap-3">
         <Progress
           value={percentage}
-          className={`h-3 flex-1 ${isCompleted ? '[&>div]:bg-green-500' : '[&>div]:bg-amber-500'}`}
+          className={`h-3 flex-1 ${isCompleted ? '[&>div]:bg-green-500' : '[&>div]:bg-carmelite-500'}`}
           aria-label={`${Math.round(percentage)}% completado`}
         />
         <span className={`text-sm font-medium min-w-[45px] text-right ${
-          isCompleted ? 'text-green-600' : 'text-amber-600'
+          isCompleted ? 'text-green-600' : 'text-carmelite-600'
         }`}>
           {Math.round(percentage)}%
         </span>

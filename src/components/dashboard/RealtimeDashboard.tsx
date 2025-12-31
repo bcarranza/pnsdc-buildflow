@@ -77,9 +77,9 @@ export function RealtimeDashboard({
 
       {/* Thermometer Section */}
       <section className="mb-6 md:mb-8" aria-label="Progreso de recaudación">
-        <Card className="border-amber-200 shadow-sm">
+        <Card className="border-carmelite-200 shadow-sm">
           <CardHeader className="text-center pb-2">
-            <CardTitle className="text-xl md:text-2xl text-amber-800">
+            <CardTitle className="text-xl md:text-2xl text-carmelite-800">
               Meta de Recaudación
             </CardTitle>
             <p className="text-gray-600">Para julio 2025</p>
@@ -95,9 +95,9 @@ export function RealtimeDashboard({
 
       {/* Materials Section */}
       <section className="mb-6 md:mb-8" aria-label="Lista de materiales">
-        <Card className="border-amber-200 shadow-sm">
+        <Card className="border-carmelite-200 shadow-sm">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xl text-amber-800">
+            <CardTitle className="text-xl text-carmelite-800">
               Materiales de Construcción
             </CardTitle>
           </CardHeader>
@@ -109,9 +109,9 @@ export function RealtimeDashboard({
 
       {/* Donor Wall Section with Filters */}
       <section className="mb-6 md:mb-8" aria-label="Muro de donantes">
-        <Card className="border-amber-200 shadow-sm">
+        <Card className="border-carmelite-200 shadow-sm">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xl text-amber-800">
+            <CardTitle className="text-xl text-carmelite-800">
               Muro de Donantes
             </CardTitle>
           </CardHeader>

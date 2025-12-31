@@ -219,7 +219,7 @@ export default function AdminPage() {
         <div className="flex flex-wrap gap-2">
           <Button
             onClick={() => setShowManualForm(true)}
-            className="bg-amber-500 hover:bg-amber-600"
+            className="bg-carmelite-500 hover:bg-carmelite-600"
           >
             <Plus className="w-4 h-4 mr-2" />
             Agregar Donación
@@ -256,7 +256,7 @@ export default function AdminPage() {
                 <CardTitle className="flex items-center gap-2">
                   Donaciones Pendientes
                   {donations.length > 0 && (
-                    <span className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-amber-500 rounded-full">
+                    <span className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-carmelite-500 rounded-full">
                       {donations.length}
                     </span>
                   )}
@@ -271,7 +271,7 @@ export default function AdminPage() {
             {/* Loading state */}
             {isLoading && (
               <div className="flex items-center justify-center py-12">
-                <Loader2 className="w-8 h-8 animate-spin text-amber-500" />
+                <Loader2 className="w-8 h-8 animate-spin text-carmelite-500" />
               </div>
             )}
 

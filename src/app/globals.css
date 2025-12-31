@@ -44,54 +44,77 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Carmelite Color Palette for Tailwind */
+  --color-carmelite-50: var(--carmelite-50);
+  --color-carmelite-100: var(--carmelite-100);
+  --color-carmelite-200: var(--carmelite-200);
+  --color-carmelite-300: var(--carmelite-300);
+  --color-carmelite-400: var(--carmelite-400);
+  --color-carmelite-500: var(--carmelite-500);
+  --color-carmelite-600: var(--carmelite-600);
+  --color-carmelite-700: var(--carmelite-700);
+  --color-carmelite-800: var(--carmelite-800);
+  --color-carmelite-900: var(--carmelite-900);
+
+  /* Gold accent for Tailwind */
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  /* Warm Amber Primary: #F59E0B */
-  --primary: oklch(0.795 0.16 75);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  /* Amber accent for highlights */
-  --accent: oklch(0.89 0.12 85);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.795 0.16 75);
-  --chart-1: oklch(0.795 0.16 75);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.795 0.16 75);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.89 0.12 85);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.795 0.16 75);
-  /* Custom amber shades for project use */
-  --amber-50: oklch(0.98 0.03 85);
-  --amber-100: oklch(0.96 0.06 82);
-  --amber-200: oklch(0.92 0.1 80);
-  --amber-300: oklch(0.87 0.13 78);
-  --amber-400: oklch(0.83 0.15 76);
-  --amber-500: oklch(0.795 0.16 75);
-  --amber-600: oklch(0.7 0.15 70);
-  --amber-700: oklch(0.58 0.14 65);
-  --amber-800: oklch(0.48 0.12 60);
-  --amber-900: oklch(0.38 0.1 55);
+  --background: #FFFEF9;
+  --foreground: #3D2314;
+  --card: #FDF5E6;
+  --card-foreground: #3D2314;
+  --popover: #FDF5E6;
+  --popover-foreground: #3D2314;
+  /* Carmelite Brown Primary: #8B4513 */
+  --primary: #8B4513;
+  --primary-foreground: #FDF5E6;
+  --secondary: #FDF5E6;
+  --secondary-foreground: #5D3A1A;
+  --muted: #F5E6D3;
+  --muted-foreground: #6B4423;
+  /* Gold accent for highlights */
+  --accent: #D4AF37;
+  --accent-foreground: #3D2314;
+  --destructive: #B91C1C;
+  --border: #D4A574;
+  --input: #E8D5C4;
+  --ring: #8B4513;
+  --chart-1: #8B4513;
+  --chart-2: #D4AF37;
+  --chart-3: #5D3A1A;
+  --chart-4: #B8860B;
+  --chart-5: #A0522D;
+  --sidebar: #FDF5E6;
+  --sidebar-foreground: #3D2314;
+  --sidebar-primary: #8B4513;
+  --sidebar-primary-foreground: #FDF5E6;
+  --sidebar-accent: #D4AF37;
+  --sidebar-accent-foreground: #3D2314;
+  --sidebar-border: #D4A574;
+  --sidebar-ring: #8B4513;
+
+  /* Carmelite Color Palette */
+  --carmelite-50: #FDF5E6;
+  --carmelite-100: #F5E6D3;
+  --carmelite-200: #E8D5C4;
+  --carmelite-300: #D4A574;
+  --carmelite-400: #A0522D;
+  --carmelite-500: #8B4513;
+  --carmelite-600: #7A3D11;
+  --carmelite-700: #5D3A1A;
+  --carmelite-800: #3D2314;
+  --carmelite-900: #2D1A0F;
+
+  /* Gold accent */
+  --gold-400: #D4AF37;
+  --gold-500: #B8860B;
+  --gold-600: #996515;
 }
 
 .dark {

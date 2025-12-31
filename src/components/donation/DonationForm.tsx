@@ -186,9 +186,9 @@ export function DonationForm({ materials }: DonationFormProps) {
   }
 
   return (
-    <Card className="border-amber-200">
+    <Card className="border-carmelite-200">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl text-amber-800 text-center">
+        <CardTitle className="text-xl text-carmelite-800 text-center">
           Registrar Donación
         </CardTitle>
         <p className="text-sm text-gray-600 text-center">
@@ -338,7 +338,7 @@ export function DonationForm({ materials }: DonationFormProps) {
             />
 
             {/* WhatsApp Fallback */}
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div className="bg-carmelite-50 border border-carmelite-200 rounded-lg p-4">
               <div className="flex items-start gap-3">
                 <MessageCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
                 <div>
@@ -365,7 +365,7 @@ export function DonationForm({ materials }: DonationFormProps) {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold min-h-[52px] text-lg"
+              className="w-full bg-carmelite-500 hover:bg-carmelite-600 text-white font-semibold min-h-[52px] text-lg"
             >
               {isSubmitting ? (
                 <>
